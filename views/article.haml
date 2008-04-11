@@ -1,0 +1,15 @@
+%div{:class => "articles"}
+  %div{:class => "article"}
+    %h1= @article.title
+    %div{:class => "article_text"}
+      = @article.text
+    %br
+    %span{:class => "article_by"} 
+      %h4= "Posted by: #{@article.posted_by}"
+    %span{:class => "article_created_at"} 
+      %h4= "Posted on: #{@article.created_at}"
+    %span{:class => "article_tags"}
+      -for tag in @article.tags 
+        = "Tags: #{tag.name}"
+    %br
+    %a{:href => "/articles" } Back

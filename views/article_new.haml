@@ -1,0 +1,21 @@
+%div{:id => "new_article"}
+  %h3 New Article
+  %form{:id => "article_form", :method => "post", :action => "/articles/create"}
+    %label Title:
+    %br
+    %input{:id => "article_title", :name => "article_title", :type => "text", :value => ""} 
+    %br
+    %label Text:
+    %br
+    %textarea{:id => "article_text", :name => "article_text", :cols => "40" , :rows => "15"}
+    %br
+    %lable Posted by:
+    %br
+    %input{:id => "article_posted_by", :name => "article_posted_by", :type => "text", :value => ""}
+    %br
+    %label Tags
+    %br
+    %input{:id => "article_tags", :name => "article_tags", :value => ""}
+    %br
+    %input{:type => "submit", :value => "Post"}
+

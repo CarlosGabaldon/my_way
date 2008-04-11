@@ -1,0 +1,13 @@
+!!! Strict
+
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %title 
+      = @title || 'My Way!'
+      
+    %link{:rel => "stylesheet", :href => "/css/style.css", :type => "text/css", :media => "all"}
+    
+  %body
+    %h1 The Sinatra Way
+
+    = @content

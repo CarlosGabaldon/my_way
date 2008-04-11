@@ -1,0 +1,19 @@
+%div{:class => "articles"}
+  %div{:class => "article"}
+    - for article in @articles
+      %h2 
+        %a{:href => "/article/#{article.permalink}" }
+          = article.title
+      %div{:class => "article_text"}
+        = article.short_text
+      %br
+      %span{:class => "article_by"} 
+        %h4= "Posted by: #{article.posted_by}"
+      %span{:class => "article_created_at"} 
+        %h4= "Posted on: #{article.created_at}"
+      %span{:class => "article_tags"}
+        -for tag in article.tags 
+          = "Tags: #{tag.name}"
+  %a{:href => "/articles/new"} New Article        
+  
+
