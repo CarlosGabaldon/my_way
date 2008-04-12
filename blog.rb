@@ -28,10 +28,18 @@ class Article < DataMapper::Base
   def short_text
     text_len = 50
     if self.text.length > text_len
-      "#{self.text[0, text_len]}.. <a href='/article/#{self.permalink}'> more >>"
+      "#{self.text[0, text_len]}.. <a href='/article/#{self.permalink}'> more >> </a>"
     else
       self.text
     end
+  end
+  
+  def written_by
+    "Written by: #{self.posted_by}"
+  end
+  
+  def written_on
+    self.created_at.strftime("Written on: %m/%d/%Y")
   end
   
 end

@@ -1,0 +1,28 @@
+// Constant Definitions
+
+!sidebar_width = 200px
+!page_width    = 800px
+!primary_color = #eeeeee
+
+// Global Attributes
+
+body
+  :font
+    :family fantasy
+    :size 1em
+    :weight bold
+
+// Scoped Styles
+
+#articles
+  :width= !page_width
+  #sidebar
+    :float  right
+    :width= !sidebar_width
+  #main
+    :width= !page_width - !sidebar_width
+    :background= !primary_color
+    h2
+      :color blue
+#footer
+  :height 200px
