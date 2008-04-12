@@ -56,12 +56,14 @@ database.table_exists?(Tag) or database.save(Tag)
 
 ### CONTROLLER ACTIONS
 
-layout 'layout.haml'
-
-static '/css', 'css'
+get '/style.css' do
+  header 'Content-Type' => 'text/css; charset=utf-8'
+  sass :style
+end
 
 ## LIST ARTICLES ##
 get '/articles' do
+  
   @articles = Article.all :limit => 10, 
                           :order => 'created_at desc'                       
   view :articles
@@ -97,19 +99,24 @@ end
 
 
 ## EDIT ARTICLE ##
-get 'article/edit/:permalink' do
-  ## todo
+get '/article/edit/:permalink' do
+  @article = Article.find :first,
+                          :permalink => params[:permalink] 
+  view :article_edit
 end
 
-post 'article/update' do
-  ## todo
+post '/article/update/:permalink' do
+  @article = Article.find :first,
+                          :permalink => params[:permalink]
+                          
+  
 end
 
 private
 
 def view(view)
-  @content = haml view
-  haml :layout
+  haml view
+  #erb view
 end
 
 def create_permalink(string)

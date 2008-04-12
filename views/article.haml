@@ -12,4 +12,6 @@
       -for tag in @article.tags 
         = "Tags: #{tag.name}"
     %br
+    %a{:href => "/article/edit/#{@article.permalink}"} Edit
+    or
     %a{:href => "/articles" } Back
