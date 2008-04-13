@@ -1,17 +1,17 @@
 = My Way - sung by Sinatra 
 
-# by Carlos Gabaldon <carlosgabaldon.com>
+  # by Carlos Gabaldon <carlosgabaldon.com>
  
-# * project page: http://github.com/CarlosGabaldon/my_way/
-# * project repo: git://github.com/CarlosGabaldon/my_way.git
+  # * project page: http://github.com/CarlosGabaldon/my_way/
+  # * project repo: git://github.com/CarlosGabaldon/my_way.git
  
-# This is a very simple blog that uses:
+  # This is a very simple blog that uses:
 
-# * SQLite
-# * DataMapper
-# * Sinatra
-# * Haml
-# * SASS
+  # * SQLite
+  # * DataMapper
+  # * Sinatra
+  # * Haml
+  # * SASS
 
 
  
