@@ -12,10 +12,9 @@ This is a very simple blog that uses:
 # Haml
 # SASS
 
--h # help
--p # set the port (default is 4567)
--e # set the environment (default is development)
--x # turn on the mutext lock (default is off)
+hello  do
+
+end
 
  
 = ENVIRONMENT SETUP
