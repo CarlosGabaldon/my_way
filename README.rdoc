@@ -18,23 +18,23 @@
 = ENVIRONMENT SETUP
 
 == RUBY
-  # $ curl -O ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.6.tar.gz
-  # $ tar xzvf ruby-1.8.6.tar.gz
-  # $ cd ruby-1.8.6
-  # $ ./configure --prefix=/usr/local --enable-pthread --with-readline-dir=/usr/local --enable-shared
-  # $ make
-  # $ sudo make install
-  # $ sudo make install-doc
-  # $ ruby -v
-  # $ ruby 1.8.6
+  $ curl -O ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.6.tar.gz
+  $ tar xzvf ruby-1.8.6.tar.gz
+  $ cd ruby-1.8.6
+  $ ./configure --prefix=/usr/local --enable-pthread --with-readline-dir=/usr/local --enable-shared
+  $ make
+  $ sudo make install
+  $ sudo make install-doc
+  $ ruby -v
+  $ ruby 1.8.6
 
 == SQLITE 
-  # $ wget http://www.sqlite.org/sqlite-3.5.4.tar.gz
-  # $ tar xvfz sqlite-3.5.4.tar.gz
-  # $ cd sqlite-3.5.4
-  # $ ./configure --prefix=/usr/local
-  # $ make
-  # $ sudo make install
+  $ wget http://www.sqlite.org/sqlite-3.5.4.tar.gz
+  $ tar xvfz sqlite-3.5.4.tar.gz
+  $ cd sqlite-3.5.4
+  $ ./configure --prefix=/usr/local
+  $ make
+  $ sudo make install
 
 == GEMS
   $ sudo gem install sinatra 
