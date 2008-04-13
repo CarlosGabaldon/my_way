@@ -1,7 +1,7 @@
 // Constant Definitions
 
-!sidebar_width = 200px
-!page_width    = 800px
+!sidebar_width = 300px
+!page_width    = 500px
 !primary_color = #eeeeee
 
 // Global Attributes
@@ -11,18 +11,39 @@ body
     :family fantasy
     :size 1em
     :weight bold
+  :background-image url(/images/pearl.gif)
+  :background
+    :position center top
+    :color #e1dbad
+    :repeat repeat
 
 // Scoped Styles
 
-#articles
+#contents
   :width= !page_width
+  :background= !primary_color
+  :margin 0
+  :text-align left
+  :padding 0 15px 0 15px
+  :position absolute
+  :top 0
+  :left 50%
+  :margin-left -445px
+  :min-height 100
+  
   #sidebar
     :float  right
     :width= !sidebar_width
-  #main
-    :width= !page_width - !sidebar_width
-    :background= !primary_color
+    
+  .articles
+    :width= !page_width
     h2
       :color blue
+    :padding
+      :top 2px
+      :right 20px
+      :left 20px
 #footer
   :height 200px
+  
+ 

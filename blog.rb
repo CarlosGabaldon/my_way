@@ -64,7 +64,7 @@ database.table_exists?(Tag) or database.save(Tag)
 
 ### CONTROLLER ACTIONS
 
-get '/style.css' do
+get '/application.css' do
   header 'Content-Type' => 'text/css; charset=utf-8'
   sass :style
 end
