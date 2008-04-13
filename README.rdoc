@@ -12,6 +12,7 @@ This is a very simple blog that uses:
 # Haml
 # SASS
 
+
  
 = ENVIRONMENT SETUP
 
