@@ -6,11 +6,11 @@
   project repo: git://github.com/CarlosGabaldon/my_way.git
  
   This is a very simple blog that uses:
-  SQLite
-  DataMapper
-  Sinatra
-  Haml
-  SASS
+  SQLite:     http://www.sqlite.org/
+  DataMapper: http://datamapper.org/
+  Sinatra:    http://sinatrarb.com/
+  Haml:       http://haml.hamptoncatlin.com/
+  SASS:       http://haml.hamptoncatlin.com/docs/rdoc/classes/Sass.html
 
 
  
