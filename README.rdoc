@@ -1,0 +1,58 @@
+= My Way - sung by Sinatra 
+
+by Carlos Gabaldon <carlosgabaldon.com>
+ 
+project page: http://github.com/CarlosGabaldon/my_way/
+project repo: git://github.com/CarlosGabaldon/my_way.git
+ 
+This is a very simple blog that uses:
+SQLite
+DataMapper
+Sinatra
+Haml
+SASS
+
+ 
+= ENVIRONMENT SETUP
+
+== RUBY
+$ curl -O ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.6.tar.gz
+$ tar xzvf ruby-1.8.6.tar.gz
+$ cd ruby-1.8.6
+$ ./configure --prefix=/usr/local --enable-pthread --with-readline-dir=/usr/local --enable-shared
+$ make
+$ sudo make install
+$ sudo make install-doc
+$ ruby -v
+$ ruby 1.8.6
+
+== SQLITE 
+$ wget http://www.sqlite.org/sqlite-3.5.4.tar.gz
+$ tar xvfz sqlite-3.5.4.tar.gz
+$ cd sqlite-3.5.4
+$ ./configure --prefix=/usr/local
+$ make
+$ sudo make install
+
+== GEMS
+$ sudo gem install sinatra 
+$ sudo gem install datamapper
+$ sudo gem install syntaxi  
+$ sudo gem install do_sqlite3
+$ sudo gem install rspec
+$ sudo gem install --no-ri haml
+
+
+== TEXTMATE
+$ cd /Applications/TextMate.app/Contents/SharedSupport/Bundles
+$ svn co "http://macromates.com/svn/Bundles/trunk/Bundles/Ruby Haml.tmbundle"
+
+
+= Dance
+
+$ cd my_way
+$ ruby blog.rb
+
+
+
+Copyright (c) 2008 Carlos Gabaldon, released under the MIT license
