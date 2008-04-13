@@ -5,7 +5,7 @@
   project page: http://github.com/CarlosGabaldon/my_way/
   project repo: git://github.com/CarlosGabaldon/my_way.git
  
-  This is a very simple blog that uses:
+  This is blog that dances to Sinatra:
   SQLite:     http://www.sqlite.org/
   DataMapper: http://datamapper.org/
   Sinatra:    http://sinatrarb.com/
@@ -14,7 +14,7 @@
 
 
  
-= ENVIRONMENT SETUP
+= SET THE STAGE
 
 == RUBY
   $ curl -O ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.6.tar.gz
