@@ -8,9 +8,13 @@ project repo: git://github.com/CarlosGabaldon/my_way.git
 This is a very simple blog that uses:
 
 # SQLite
+
 # DataMapper
+
 # Sinatra
+
 # Haml
+
 # SASS
 
 
