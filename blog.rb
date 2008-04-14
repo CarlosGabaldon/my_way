@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
+require 'Time'
 
 
 ### DB SETUP ###
@@ -116,8 +117,20 @@ end
 post '/article/update/:permalink' do
   @article = Article.find :first,
                           :permalink => params[:permalink]
-                          
-  
+  if @article
+    @article.title = params[:article_title]
+    @article.text = params[:article_text]
+    @article.posted_by = params[:article_posted_by]
+    @article.updated_at = Time.now
+    
+    if @article.save
+      redirect "/article/#{@article.permalink}"
+    else
+      redirect "/articles"
+    end
+  else
+    redirect "/articles"
+  end                        
 end
 
 private
