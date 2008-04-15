@@ -19,12 +19,18 @@ DataMapper::Database.setup({
 class Article < DataMapper::Base
   has_many :comments
   has_many :tags
+  
   property :title, :text
   property :text, :text
   property :posted_by, :string
   property :permalink, :text
   property :created_at, :datetime
   property :updated_at, :datetime
+  
+  validates_presence_of :title
+  validates_length_of :title, :minimum => 2
+  validates_presence_of :body
+  validates_length_of :body, :minimum => 1
   
   def short_text
     text_len = 50
@@ -98,10 +104,15 @@ post '/articles/create' do
                          :text      => params[:article_text],
                          :posted_by => params[:article_posted_by],
                          :permalink => create_permalink(params[:article_title])
-  if @article.save 
-    redirect "/article/#{@article.permalink}"
+  
+  if @article.valid?
+    if @article.save 
+      redirect "/article/#{@article.permalink}"
+    else
+      redirect "/articles"
+    end
   else
-    redirect "/articles"
+    view :article_new
   end
   
 end
@@ -139,6 +150,7 @@ def view(view)
   haml view
   #erb view
 end
+
 
 def create_permalink(string)
   string = string.strip
