@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
-require 'Time'
 
 
 ### DB SETUP ###
@@ -20,6 +19,7 @@ class Article < DataMapper::Base
   has_many :comments
   has_many :tags
   
+  property :id, :integer, :key => true
   property :title, :text
   property :text, :text
   property :posted_by, :string
@@ -27,14 +27,15 @@ class Article < DataMapper::Base
   property :created_at, :datetime
   property :updated_at, :datetime
   
-  validates_presence_of :title
-  validates_length_of :title, :minimum => 2
-  validates_presence_of :body
-  validates_length_of :body, :minimum => 1
+  def valid?
+    return false unless self.title and self.title.length > 0
+    return false unless self.text and self.text.length > 0
+    true
+  end
   
   def short_text
     text_len = 50
-    if self.text.length > text_len
+    if self.text and self.text.length > text_len
       "#{self.text[0, text_len]}.. <a href='/article/#{self.permalink}'> more >> </a>"
     else
       self.text
@@ -48,6 +49,7 @@ class Article < DataMapper::Base
   def written_on
     self.created_at.strftime("Written on: %m/%d/%Y")
   end
+
   
 end
   
@@ -112,7 +114,7 @@ post '/articles/create' do
       redirect "/articles"
     end
   else
-    view :article_new
+    redirect "/articles/new"
   end
   
 end
