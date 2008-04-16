@@ -28,8 +28,8 @@ class Article < DataMapper::Base
   property :updated_at, :datetime
   
   def valid?
-    return false unless self.title and self.title.length > 0
-    return false unless self.text and self.text.length > 0
+    return false unless self.title and self.title.strip.length != 0 
+    return false unless self.text and self.text.strip.length != 0 
     true
   end
   
