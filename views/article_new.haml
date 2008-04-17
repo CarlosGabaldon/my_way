@@ -1,8 +1,12 @@
 %div{:id => "new_article"}
   - if @article
-    - @article.errors.full_messages.each do |error|
+    #errors
+      %h3 Sorry, but you forgot somethings..
       %ol
-        %li = error
+        - @article.validation_errors.each do |error|
+          %li 
+            = error
+            
   %h3 New Article
   %form{:id => "article_form", :method => "post", :action => "/articles/create"}
     %label Title:

@@ -27,10 +27,26 @@ class Article < DataMapper::Base
   property :created_at, :datetime
   property :updated_at, :datetime
   
+  attr_accessor :validation_errors
+  
+  def initialize(attributes = nil)
+    @validation_errors = []
+    super(attributes)
+  end
+
   def valid?
-    return false unless self.title and self.title.strip.length != 0 
-    return false unless self.text and self.text.strip.length != 0 
-    true
+    unless self.title and self.title.strip.length != 0 
+      self.validation_errors << "Title can not be blank!"
+    end
+    unless self.text and self.text.strip.length != 0 
+      self.validation_errors << "Text can not be blank!"
+    end
+    
+    if self.validation_errors
+      false
+    else
+      true
+    end
   end
   
   def short_text
@@ -114,7 +130,8 @@ post '/articles/create' do
       redirect "/articles"
     end
   else
-    redirect "/articles/new"
+    view :article_new
+    #redirect "/articles/new" # need to redirect back to new; with @article.errors
   end
   
 end
