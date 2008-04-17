@@ -41,8 +41,11 @@ class Article < DataMapper::Base
     unless self.text and self.text.strip.length != 0 
       self.validation_errors << "Text can not be blank!"
     end
+    unless self.posted_by and self.posted_by.strip.length != 0
+      self.validation_errors << "Written by can not be blank!"
+    end
     
-    if self.validation_errors
+    if self.validation_errors.length != 0
       false
     else
       true
@@ -130,8 +133,7 @@ post '/articles/create' do
       redirect "/articles"
     end
   else
-    view :article_new
-    #redirect "/articles/new" # need to redirect back to new; with @article.errors
+    view :article_new 
   end
   
 end

@@ -1,25 +1,26 @@
 %div{:id => "new_article"}
   - if @article
-    #errors
-      %h3 Sorry, but you forgot somethings..
-      %ol
-        - @article.validation_errors.each do |error|
-          %li 
-            = error
+    - if @article.validation_errors
+      #errors
+        %h3 Sorry, but you forgot somethings..
+        %ol
+          - @article.validation_errors.each do |error|
+            %li 
+              = error
             
   %h3 New Article
   %form{:id => "article_form", :method => "post", :action => "/articles/create"}
     %label Title:
     %br
-    %input{:id => "article_title", :name => "article_title", :type => "text", :value => ""} 
+    %input{:id => "article_title", :name => "article_title", :type => "text", :value => "#{@article.title if @article}"} 
     %br
     %label Text:
     %br
-    %textarea{:id => "article_text", :name => "article_text", :cols => "40" , :rows => "15"}
+    %textarea{:id => "article_text", :name => "article_text", :cols => "40" , :rows => "15"}= @article.text if @article
     %br
-    %lable Posted by:
+    %lable Written by:
     %br
-    %input{:id => "article_posted_by", :name => "article_posted_by", :type => "text", :value => ""}
+    %input{:id => "article_posted_by", :name => "article_posted_by", :type => "text", :value => "#{@article.posted_by if @article}"}
     %br
     %label Tags
     %br
