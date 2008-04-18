@@ -165,12 +165,14 @@ post '/article/update/:permalink' do
   end                        
 end
 
-private
-
-def view(view)
-  haml view
-  #erb view
+helpers do
+  def view(view)
+    haml view
+    #erb view
+  end
 end
+
+
 
 
 def create_permalink(string)
