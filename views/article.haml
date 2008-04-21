@@ -9,7 +9,7 @@
       %h4= @article.written_on
     %span{:class => "article_tags"}
       Tags: 
-      -@article.tags do |tag|
+      -@article.tags.each do |tag| 
         = tag.name
     %br
     %a{:href => "/article/edit/#{@article.permalink}"} Edit

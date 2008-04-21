@@ -1,4 +1,5 @@
 %div{:class => "articles"}
+  %a{:href => "/articles/new"} New Article 
   %div{:class => "article"}
     - @articles.each do |article|
       %h2 
@@ -14,4 +15,4 @@
         Tags: 
         -article.tags.each do |tag| 
           = tag.name
-  %a{:href => "/articles/new"} New Article        
+       
