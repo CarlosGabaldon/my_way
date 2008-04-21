@@ -94,6 +94,11 @@ class Tag < DataMapper::Base
       name = options[:name]
       article = options[:article]
       
+      $LOG.info("Class Tag.build() name => #{name}")   
+      $LOG.info("Class Tag.build() article => #{article.to_s}")  
+      
+      # article id & tag id association not geting set??
+      
       tag = Tag.find(:first, :name => name)
       if tag
         tag.count += 1
