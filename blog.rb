@@ -1,61 +1,42 @@
 require 'rubygems'
 require 'sinatra'
-require 'data_mapper'
+require 'pathname'
+
+# Edge
+require Pathname(__FILE__).dirname.expand_path + '../dm-core/lib/data_mapper'
+require Pathname(__FILE__).dirname.expand_path + '../dm-core/lib/data_mapper/auto_migrations'
+
+#GEM (0.3.1)
+#require 'data_mapper'
 
 
 ### DB SETUP ###
 
-DataMapper::Database.setup({
-  :adapter  => 'sqlite3',
-  :host     => 'localhost',
-  :username => '',
-  :password => '',
-  :database => 'db/my_way_development'
-})
+DB_PATH = 'db/my_way_development'
 
+DataMapper.setup(:sqlite3, "sqlite3://#{DB_PATH}")
 
 $LOG = Logger.new('log/my_way.log')
 $LOG.level = Logger::INFO
 
 ### MODELS ###
 
-class Article < DataMapper::Base
-  has_many :comments
-  has_many :tags
+class Article
   
-  property :id,         :integer, :key => true
-  property :title,      :text
-  property :text,       :text
-  property :posted_by,  :string
-  property :permalink,  :text
-  property :created_at, :datetime
-  property :updated_at, :datetime
+  include DataMapper::Resource
   
-  attr_accessor :validation_errors
+  many_to_many :comments
+  many_to_many :tags
   
-  def initialize(attributes = nil)
-    @validation_errors = []
-    super(attributes)
-  end
+  property :id, Fixnum, :serial => true
+  property :title, String, :nullable => false
+  property :text, DataMapper::Types::Text, :nullable => false
+  property :posted_by, String, :nullable => false
+  property :permalink, String
+  property :created_at, DateTime
+  property :updated_at, DateTime
 
-  def valid?
-    unless self.title and self.title.strip.length != 0 
-      self.validation_errors << "Title can not be blank!"
-    end
-    unless self.text and self.text.strip.length != 0 
-      self.validation_errors << "Text can not be blank!"
-    end
-    unless self.posted_by and self.posted_by.strip.length != 0
-      self.validation_errors << "Written by can not be blank!"
-    end
-    
-    if self.validation_errors.length != 0
-      false
-    else
-      true
-    end
-  end
-  
+
   def short_text
     text_len = 50
     if self.text and self.text.length > text_len
@@ -76,18 +57,28 @@ class Article < DataMapper::Base
   
 end
   
-class Comment < DataMapper::Base
+class Comment
+  
+  include DataMapper::Resource
+  
   belongs_to :article
-  property :posted_by, :string
-  property :email,     :string
-  property :url,       :string
-  property :body,      :text
+  
+  property :id, Fixnum, :serial => true
+  property :posted_by, String
+  property :email, String
+  property :url, String
+  property :body, DataMapper::Types::Text
 end
 
-class Tag < DataMapper::Base
-  has_many :articles
-  property :name, :text
-  property :count, :integer
+class Tag 
+  
+  include DataMapper::Resource
+  
+  many_to_many :articles
+  
+  property :id, Fixnum, :serial => true
+  property :name, DataMapper::Types::Text
+  property :count, Fixnum, :default  => 0
   
   class << self
     def build(options)
@@ -97,23 +88,20 @@ class Tag < DataMapper::Base
       $LOG.info("Class Tag.build() name => #{name}")   
       $LOG.info("Class Tag.build() article => #{article.to_s}")  
       
-      # article id & tag id association not geting set??
+      tag = Tag.find_or_create(:name => name)
+      $LOG.info("Class Tag.build() tag => #{tag.to_s}") if tag
       
-      tag = Tag.find(:first, :name => name)
-      if tag
-        tag.count += 1
-        article.tags << tag
-      else
-          article.tags.create(:name => name, :count => 1)
-      end
+      article.tags << tag
+      
+ #     if tag
+ #       tag.count += 1
+ #     end
     
     end
   end
 end
 
-database.table_exists?(Article) or database.save(Article)
-database.table_exists?(Comment) or database.save(Comment)
-database.table_exists?(Tag) or database.save(Tag)
+DataMapper::AutoMigrations.auto_migrate!
 
 ### CONTROLLER ACTIONS
 
@@ -159,8 +147,7 @@ post '/articles/create' do
        
   tags_param = params[:article_tags]    
   
-  $LOG.info("POST 'articles/create' 
-            params[:article_tags] => #{@article.title}")
+  $LOG.info("POST 'articles/create' params[:article_title] => #{@article.title}")
           
   if tags_param
     tags_param.each(",") do |tag_param| 

@@ -1,10 +1,10 @@
 %div{:id => "new_article"}
   - if @article
-    - if @article.validation_errors
+    - if @article.errors
       #errors
         %h3 Sorry, but you forgot somethings..
         %ol
-          - @article.validation_errors.each do |error|
+          - @article.errors.full_messages.each do |error|
             %li 
               = error
             
